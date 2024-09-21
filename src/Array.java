@@ -24,13 +24,14 @@ public class Array {
         System.out.println(min);
         sc.close();
         */
-        int result = sum(1,2);
-        System.out.println(result);
-
-
-        OOPS1 o2 = new OOPS1();
-        o2.getClass();
-
+//        int result = sum(1,2);
+//        System.out.println(result);
+//
+//
+//        OOPS1 o2 = new OOPS1();
+//        o2.getClass();
+        String str = "umang";
+        System.out.println(str.charAt(0));
     }
     public static int sum(int a, int b){
         int sumNo = a+b;

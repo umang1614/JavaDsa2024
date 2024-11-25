@@ -6,6 +6,7 @@ public class List {
     public static void main(String[] args) {
         //ArrayList
 //        ArrayList<Integer> list = new ArrayList<>();
+        java.util.LinkedList<Integer> LL = new LinkedList<>();
         Stack<Integer> list = new Stack<>();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the size");

@@ -1,7 +1,7 @@
 package JavaDSA.Graph;
 import java.util.*;
 
-public class G5NoOfProvinces {
+public class  G5NoOfProvinces {
     class Solution {
         public void dfs(int node, boolean vis[], ArrayList<ArrayList<Integer>> adj){
             vis[node] = true;

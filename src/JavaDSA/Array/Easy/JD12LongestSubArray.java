@@ -1,15 +1,14 @@
 package JavaDSA.Array.Easy;
+import java.util.*;
 
 public class JD12LongestSubArray {
 
-    public static int getLongestSubArray(int[] nums, long sum){
+    public static int getLongestSubArrayBrute(int[] nums, long sum){
         int len = 0;
         for(int i = 0; i<nums.length; i++){
-            for(int j = 0; j<nums.length; j++){
-                long s = 0;
-                for(int k = i; k<=j;k++){
-                    s += nums[k];
-                }
+            long s = 0;
+            for(int j = i; j<nums.length; j++){
+                s += nums[j];
                 if(s == sum){
                     len = Math.max(len,j-i+1);
                 }
@@ -18,26 +17,52 @@ public class JD12LongestSubArray {
         return len;
     }
 
-
-    public static int getLongestSubArray2(int[] nums, int sum){
-        int len = 0;
-        for(int i = 0; i<nums.length; i++){
-            for(int j = 0; j<nums.length; j++){
-                int s = 0;
-                for(int k = i; k<=j; k++){
-                    s+=nums[k];
-                }
-                if(s == sum){
-                    len = Math.max(len, j-i+1);
-                }
+    public static int getLongestSubArrayBetter(int[] nums, long k){
+        int n = nums.length;
+        long sum = 0;
+        int maxLen = 0;
+        Map<Long, Integer> preMap = new HashMap<>();
+        for(int i = 0; i<n; i++){
+            sum += nums[i];
+            if(sum == k){
+                maxLen = Math.max(maxLen, i+1);
+            }
+            long rem = sum - k;
+            if(preMap.containsKey(rem)){
+                int len = i - preMap.get(rem);
+                maxLen = Math.max(maxLen, len);
+            }
+            if(!preMap.containsKey(sum)){
+                preMap.put(sum,i);
             }
         }
-        return len;
+        return maxLen;
+    }
+
+    public static int getLongestSubArrayOptimal(int[] nums, long k){
+        int left = 0, right = 0;
+        long sum = nums[0];
+        int maxLen = 0;
+        int n = nums.length;
+        while(right < n){
+            while(left <= right && sum > k){
+                sum -= nums[left];
+                left++;
+            }
+            if(sum == k){
+                maxLen = Math.max(maxLen, right-left+1);
+            }
+            right++;
+            if(right < n) {
+                sum += nums[right];
+            }
+        }
+        return maxLen;
     }
     public static void main(String[] args) {
-        int[] a = {2, 3, 5, 1, 9};
-        long k = 10;
-        int len = getLongestSubArray2(a, 5);
+        int[] a = {1,2,4,1,1,1,1,3,3};
+        long k = 6;
+        int len = getLongestSubArrayOptimal(a, k);
         System.out.println("The length of the longest subarray is: " + len);
     }
 }
